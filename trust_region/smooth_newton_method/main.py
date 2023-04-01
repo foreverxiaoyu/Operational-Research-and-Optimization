@@ -3,29 +3,6 @@ from teest import smooth_newton_method
 
 
 def trust_region_subproblem(n, f, grad_f, hess_f, delta):
-    x = np.zeros((n, 1))
-    x0 = np.zeros((n, 1))
-    eta = 0.1
-    for i in range(10):
-        H = hess_f(x)
-        grad = grad_f(x)
-        # print(f"grad为:{grad.shape}")
-        d = smooth_newton_method(n, f, grad, H, delta)
-        # print(f"d为:{d}")
-        f_1 = f(x) - f(x + d)
-        q = f(x0) - f(d) - np.dot(grad.T, d) - 0.5 * np.dot(d.T, np.dot(H, d))
-        if np.linalg.norm(q) > 0:
-            rho_k = f_1 / q
-            # print(f"rho_k为:{rho_k}")
-        if (rho_k < 0.25).all():
-            delta *= 0.25
-        elif (rho_k > 0.75).all() and np.linalg.norm(d) == delta:
-            delta = min(2 * delta, 100)
-        if (rho_k > eta).all():
-            x = x + d
-            # print(f"x为:{x}")
-        if np.linalg.norm(grad) < 1e-6:
-            break
 
     return x
 
