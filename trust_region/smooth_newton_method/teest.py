@@ -28,6 +28,7 @@ def JacobiH(n, mu, lam, d, Bk, deltak):
     # J = np.array([[1, 0, np.zeros(n, 1)],
     #               [pmu, 1 - thetak, -2 * (1 + thetak) * d.T],
     #               [np.zeros(n, 1), d, Bk + lam * I]])
+    # 用np.block更加合适一点
     J[0][0] = 1
     J[0][1] = 0
     J[0][2:n+2] = np.zeros((1, n), dtype=float)
